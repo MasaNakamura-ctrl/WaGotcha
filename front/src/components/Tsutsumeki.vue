@@ -10,7 +10,7 @@ import { tsutsumekis } from './tsutsumeki.js'
         <button>ツツメキ</button>
     </div>
     <div class="Tsutsumeki-poted" v-for="(tsutsumeki, index) in tsutsumekis">
-        <p class="Tsutsumeki-words">{{ tsutsumeki.text }}</p>
+        <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
         <button>WaGotcha</button>
         <button>改む</button>
         <button>消つ</button>
