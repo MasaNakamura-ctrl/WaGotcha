@@ -30,3 +30,26 @@ nav a {
 nav a:hover {
   color: #1e90ff;
 }
+
+.Tsutsumeki-create{
+  width: 300px;
+  height: 240px;
+  margin: 5px;
+  border:none;
+}
+
+.Tsutsumeki-text{
+  width: 300px;
+  height: 200px;
+}
+
+.Tsutsumeki-poted{
+  width: 308px;
+  border:solid;
+  color: #d3d3d3;
+  margin: 0 0 -1px;
+}
+
+.Tsutsumeki-words{
+  color: #000000;
+}
