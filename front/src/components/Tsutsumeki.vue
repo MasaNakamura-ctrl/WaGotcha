@@ -8,13 +8,11 @@ const inputText = ref('')
 let id_count = 4;
 // IDへの対応はRESTAPIと連携次第そちらへ移行
 function addTsutsumeki(){
-    console.log(id_count)
     if (inputText.value.trim()) {
         tsutsumekis.value.push({id:id_count, tsutsumeki: inputText.value })
         inputText.value = ''
         id_count += 1;
     }
-    console.log(id_count)
 }
 
 // データ更新
@@ -61,7 +59,7 @@ function clickWaGotcha(index){
             <v-btn size="x-small" variant="outlined" color="error" @click="deleteTsutsumeki(index)">消つ</v-btn>
         </div>
         <div v-else>
-            <textarea v-model="tsutsumekis[index].tsutsumeki" class="Tsutsumeki-text" maxlength="140"></textarea>
+            <textarea v-model="tsutsumekis[index].tsutsumeki" class="Tsutsumeki-text Aratamu-text" maxlength="140"></textarea>
             <v-btn size="x-small" variant="outlined" color="primary" @click="completeEdittingTsutsumeki(index)">記す</v-btn>
             <v-btn size="x-small" variant="outlined" color="error" @click="quitEdittingTsutsumeki(index)">辞む</v-btn>
         </div>
