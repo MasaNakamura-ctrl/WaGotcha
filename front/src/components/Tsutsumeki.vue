@@ -1,6 +1,16 @@
 <script setup>
+import { ref } from 'vue'
 import { tsutsumekis } from './tsutsumeki.js'
 
+const inputText = ref('')
+
+// データ追加
+function addTsutsumeki(){
+    if (inputText.value.trim()) {
+        tsutsumekis.value.push({ tsutsumeki: inputText.value })
+        inputText.value = ''
+    }
+}
 // データ削除
 function deleteTsutsumeki(index){
     tsutsumekis.value.splice(index,1)
@@ -10,11 +20,11 @@ function deleteTsutsumeki(index){
 <template>
     <h1>ツツメキ</h1>
     <div class="Tsutsumeki-create">
-        <textarea class="Tsutsumeki-text" placeholder="ツツメキしてWaGotchaしてもらおう！">
+        <textarea v-model="inputText" class="Tsutsumeki-text" maxlength="140" placeholder="ツツメキしてWaGotchaしてもらおう！">
         </textarea>
-        <button>ツツメキ</button>
+        <button @click="addTsutsumeki">ツツメキ</button>
     </div>
-    <div class="Tsutsumeki-poted" v-for="(tsutsumeki, index) in tsutsumekis">
+    <div class="Tsutsumeki-posted" v-for="(tsutsumeki, index) in tsutsumekis">
         <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
         <button>WaGotcha</button>
         <button>改む</button>
