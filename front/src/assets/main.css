@@ -53,3 +53,8 @@ nav a:hover {
 .Tsutsumeki-words{
   color: #000000;
 }
+
+.WaGotcha.active{
+  color:red;
+  font-weight:bold;
+}

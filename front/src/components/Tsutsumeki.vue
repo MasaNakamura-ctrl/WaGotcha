@@ -3,11 +3,14 @@ import { ref } from 'vue'
 import { tsutsumekis } from './tsutsumeki.js'
 
 const inputText = ref('')
+const clickedIndices = ref(new Set()) // WaGotchaされたインデックスを記録
 
 // データ追加
+// IDへの対応はRESTAPIと連携次第そちらへ移行
 function addTsutsumeki(){
+    const tailId = tsutsumekis.value.length + 1
     if (inputText.value.trim()) {
-        tsutsumekis.value.push({ tsutsumeki: inputText.value })
+        tsutsumekis.value.push({id:tailId, tsutsumeki: inputText.value })
         inputText.value = ''
     }
 }
@@ -16,6 +19,9 @@ function deleteTsutsumeki(index){
     tsutsumekis.value.splice(index,1)
 }
 
+function clickWaGotcha(index){
+    clickedIndices.value.add(index)
+}
 </script>
 <template>
     <h1>ツツメキ</h1>
@@ -26,7 +32,9 @@ function deleteTsutsumeki(index){
     </div>
     <div class="Tsutsumeki-posted" v-for="(tsutsumeki, index) in tsutsumekis">
         <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
-        <button>WaGotcha</button>
+        <button class="WaGotcha" @click="clickWaGotcha(index)"
+        :class= "{active: clickedIndices.has(index)}"
+        >WaGotcha</button>
         <button>改む</button>
         <button @click="deleteTsutsumeki(index)">消つ</button>
     </div>
