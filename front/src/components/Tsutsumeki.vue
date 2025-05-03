@@ -3,7 +3,8 @@ import { ref } from 'vue'
 import { tsutsumekis } from './tsutsumeki.js'
 
 const inputText = ref('')
-const clickedIndices = ref(new Set()) // WaGotchaされたインデックスを記録
+// WaGotchaされたインデックスを記録(RESTAPIと連携次第別対応)
+const clickedIndices = ref(new Set())
 
 // データ追加
 // IDへの対応はRESTAPIと連携次第そちらへ移行
@@ -19,6 +20,7 @@ function deleteTsutsumeki(index){
     tsutsumekis.value.splice(index,1)
 }
 
+// WaGotcha押下(RESTAPIと連携次第別対応)
 function clickWaGotcha(index){
     clickedIndices.value.add(index)
 }
