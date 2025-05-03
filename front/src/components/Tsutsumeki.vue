@@ -49,22 +49,21 @@ function clickWaGotcha(index){
     <div class="Tsutsumeki-create">
         <textarea v-model="inputText" class="Tsutsumeki-text" maxlength="140" placeholder="ツツメキしてWaGotchaしてもらおう！">
         </textarea>
-        <button @click="addTsutsumeki">ツツメキ</button>
+        <v-btn size="small" variant="outlined" color="primary" @click="addTsutsumeki">ツツメキ</v-btn>
     </div>
     <div class="Tsutsumeki-posted" v-for="(tsutsumeki, index) in tsutsumekis">
         <div v-if="editingIndex !== index">
             <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
-            <button class="WaGotcha" @click="clickWaGotcha(index)"
+            <v-btn size="x-small" variant="outlined" color="primary" class="WaGotcha" @click="clickWaGotcha(index)"
             :class= "{active: clickedIndices.has(tsutsumeki.id)}"
-            >WaGotcha</button>
-            <button @click="editTsutsumeki(index)">改む</button>
-            <button @click="deleteTsutsumeki(index)">消つ</button>
+            >WaGotcha</v-btn>
+            <v-btn size="x-small" variant="outlined" color="success" @click="editTsutsumeki(index)">改む</v-btn>
+            <v-btn size="x-small" variant="outlined" color="error" @click="deleteTsutsumeki(index)">消つ</v-btn>
         </div>
         <div v-else>
             <textarea v-model="tsutsumekis[index].tsutsumeki" class="Tsutsumeki-text" maxlength="140"></textarea>
-            <button class="WaGotcha" @click="quitEdittingTsutsumeki(index)">WaGotcha</button>
-            <button @click="completeEdittingTsutsumeki(index)">記す</button>
-            <button @click="quitEdittingTsutsumeki(index)">辞む</button>
+            <v-btn size="x-small" variant="outlined" color="primary" @click="completeEdittingTsutsumeki(index)">記す</v-btn>
+            <v-btn size="x-small" variant="outlined" color="error" @click="quitEdittingTsutsumeki(index)">辞む</v-btn>
         </div>
     </div>
 </template>

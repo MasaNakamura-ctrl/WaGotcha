@@ -39,8 +39,15 @@ nav a:hover {
 }
 
 .Tsutsumeki-text{
-  width: 300px;
+  width: 305px;
   height: 200px;
+  color: #000000;
+  border: 1px solid#000000;
+  resize: none;
+}
+
+.Tsutsumeki-text::placeholder{
+  color:#D3D3D3;
 }
 
 .Tsutsumeki-posted{
@@ -48,6 +55,7 @@ nav a:hover {
   border:solid;
   color: #d3d3d3;
   margin: 0 0 -1px;
+  resize: none;
 }
 
 .Tsutsumeki-words{
