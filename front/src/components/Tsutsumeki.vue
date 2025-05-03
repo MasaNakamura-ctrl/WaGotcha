@@ -1,4 +1,6 @@
 <script setup>
+import { tsutsumekis } from './tsutsumeki.js'
+
 </script>
 <template>
     <h1>ツツメキ</h1>
@@ -7,14 +9,8 @@
         </textarea>
         <button>ツツメキ</button>
     </div>
-    <div class="Tsutsumeki-poted">
-        <p class="Tsutsumeki-words">投稿されたツツメキ</p>
-        <button>WaGotcha</button>
-        <button>改む</button>
-        <button>消つ</button>
-    </div>
-    <div class="Tsutsumeki-poted">
-        <p class="Tsutsumeki-words">投稿されたツツメキ</p>
+    <div class="Tsutsumeki-poted" v-for="(tsutsumeki, index) in tsutsumekis">
+        <p class="Tsutsumeki-words">{{ tsutsumeki.text }}</p>
         <button>WaGotcha</button>
         <button>改む</button>
         <button>消つ</button>
