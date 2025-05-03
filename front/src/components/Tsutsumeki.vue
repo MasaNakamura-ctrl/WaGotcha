@@ -1,6 +1,11 @@
 <script setup>
 import { tsutsumekis } from './tsutsumeki.js'
 
+// データ削除
+function deleteTsutsumeki(index){
+    tsutsumekis.value.splice(index,1)
+}
+
 </script>
 <template>
     <h1>ツツメキ</h1>
@@ -13,6 +18,6 @@ import { tsutsumekis } from './tsutsumeki.js'
         <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
         <button>WaGotcha</button>
         <button>改む</button>
-        <button>消つ</button>
+        <button @click="deleteTsutsumeki(index)">消つ</button>
     </div>
 </template>
