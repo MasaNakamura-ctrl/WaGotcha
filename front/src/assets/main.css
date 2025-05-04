@@ -32,18 +32,28 @@ nav a:hover {
 }
 
 .Tsutsumeki-create{
-  width: 300px;
-  height: 240px;
-  margin: 5px;
+  width: 100%;
+  margin:10px 0;
   border:none;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .Tsutsumeki-text{
-  width: 305px;
+  width:100%;
   height: 200px;
-  color: #000000;
-  border: 1px solid#000000;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #000000;
   resize: none;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .Tsutsumeki-text{
+    font-size:1,2rem;
+  }
 }
 
 .Tsutsumeki-text::placeholder{
@@ -51,19 +61,42 @@ nav a:hover {
 }
 
 .Tsutsumeki-posted{
-  width: 308px;
-  border:solid;
-  color: #d3d3d3;
-  margin: 0 0 -1px;
-  resize: none;
+  width:100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background-color:#f9f9f9;
+}
+
+@media (min-width: 600px) {
+  .Tsutsumeki-posted{
+    font-size:1,2rem;
+  }
 }
 
 .Tsutsumeki-words{
+  margin-bottom: 8px;
   color: #000000;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .Aratamu-text{
-  border:none;
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #000000;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px){
+  .Aratamu-text {
+    font-size: 1.2rem;
+  }
 }
 
 .WaGotcha.active{
