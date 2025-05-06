@@ -1,0 +1,30 @@
+package com.example.api.tsutsumeki;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TsutsumekiService {
+    private final TsutsumekiRepository tsutsumekiRepository;
+
+    public TsutsumekiService(TsutsumekiRepository tsutsumekiRepository){
+        this.tsutsumekiRepository = tsutsumekiRepository;
+    }
+
+    public List<Tsutsumeki> getAllTsutsumekis(){
+        return tsutsumekiRepository.findAll();
+    }
+
+    public void postTsutsumeki(String tsutsumeki){
+        tsutsumekiRepository.createTsutsumeki(tsutsumeki);
+    }
+
+    public void putTsutsumeki(int id, String tsutsumeki){
+        tsutsumekiRepository.updateTsutsumeki(id, tsutsumeki);
+    }
+
+    public void deleteTsutsumeki(int id){
+        tsutsumekiRepository.deleteTsutsumeki(id);
+    }
+}
