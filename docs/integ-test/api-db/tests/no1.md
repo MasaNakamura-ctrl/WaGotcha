@@ -11,13 +11,13 @@
 | 2 | '来週演奏会やります！' |
 | 3 | '○市でもくもく会やってませんか？' |
 ## テスト実施
-### API立ち上げ
-```
-./mvnw spring-boot:run // macOs
-```
 ### DB立ち上げ
 ```
 docker comopose up -d
+```
+### API立ち上げ
+```
+./mvnw spring-boot:run // macOs
 ```
 
 ### 実施結果
