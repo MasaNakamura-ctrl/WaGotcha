@@ -23,12 +23,14 @@ public class TsutsumekiController {
     private TsutsumekiService tsutsumekiService;
 
     @GetMapping
-    public ResponseEntity<List<Tsutsumeki>> getTsutsumekis(){
+    public ResponseEntity<?> getTsutsumekis(){
         try {
             List<Tsutsumeki> list = tsutsumekiService.getAllTsutsumekis();
             return ResponseEntity.ok(list);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            Map<String, String> errorBody = new HashMap<>();
+            errorBody.put("error", "Internal server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorBody);
         }
     }
     
@@ -55,7 +57,14 @@ public class TsutsumekiController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTsutsumeki(@PathVariable int id) {
-        tsutsumekiService.deleteTsutsumeki(id);
+    public ResponseEntity<?> deleteTsutsumeki(@PathVariable int id) {
+        Tsutsumeki deleted = tsutsumekiService.deleteTsutsumeki(id);
+        if (deleted==null){
+            Map<String, String> errorBody = new HashMap<>();
+            errorBody.put("error", "Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+        } else{
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(deleted);
+        }
     }
 }
