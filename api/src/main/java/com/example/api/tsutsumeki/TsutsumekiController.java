@@ -1,5 +1,7 @@
 package com.example.api.tsutsumeki;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,12 @@ public class TsutsumekiController {
     private TsutsumekiService tsutsumekiService;
 
     @GetMapping
-    public ResponseEntity<Void> getTsutsumekis(){
+    public ResponseEntity<List<Tsutsumeki>> getTsutsumekis(){
         try {
-            tsutsumekiService.getAllTsutsumekis();
-            return ResponseEntity.ok().build();
+            List<Tsutsumeki> list = tsutsumekiService.getAllTsutsumekis();
+            return ResponseEntity.ok(list);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
     
