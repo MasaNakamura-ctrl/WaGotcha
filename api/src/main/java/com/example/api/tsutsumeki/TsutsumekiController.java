@@ -1,6 +1,8 @@
 package com.example.api.tsutsumeki;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +43,15 @@ public class TsutsumekiController {
     }
 
     @PutMapping("/{id}")
-    public void updateTsutsumeki(@PathVariable int id, @RequestBody TsutsumekiRequest request) {
-        tsutsumekiService.putTsutsumeki(id, request.getTsutsumeki());
+    public ResponseEntity<?> updateTsutsumeki(@PathVariable int id, @RequestBody TsutsumekiRequest request) {
+        Tsutsumeki updated = tsutsumekiService.putTsutsumeki(id, request.getTsutsumeki());
+        if (updated==null){
+            Map<String, String> errorBody = new HashMap<>();
+            errorBody.put("error", "Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
+        } else{
+            return ResponseEntity.ok(updated);
+        }
     }
 
     @DeleteMapping("/{id}")

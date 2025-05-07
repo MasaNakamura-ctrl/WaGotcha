@@ -11,6 +11,12 @@ public class Tsutsumeki {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String tsutsumeki;
+    public Tsutsumeki(){
+    }
+    public Tsutsumeki(int id, String tsutsumeki){
+        this.id = id;
+        this.tsutsumeki = tsutsumeki;
+    }
     public int getId(){
         return id;
     }

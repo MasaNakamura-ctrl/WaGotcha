@@ -24,8 +24,12 @@ public class TsutsumekiService {
         return newTsutsumeki;
     }
 
-    public void putTsutsumeki(int id, String tsutsumeki){
-        tsutsumekiRepository.updateTsutsumeki(id, tsutsumeki);
+    public Tsutsumeki putTsutsumeki(int id, String tsutsumeki){
+        int updatedRows = tsutsumekiRepository.updateTsutsumeki(id, tsutsumeki);
+        if (updatedRows==0){
+            return null;
+        }
+        return new Tsutsumeki(id, tsutsumeki);
     }
 
     public void deleteTsutsumeki(int id){
