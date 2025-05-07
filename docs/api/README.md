@@ -54,18 +54,13 @@
 }
 ```
 ##### エラー時
-- ステータス：400 Bad Request
-```
-{
-    "error": "Bad Request"
-}
-```
-- ステータス：409 Conflict
-```
-{
-    "error": "Conflict"
-}
-```
+POSTにおける400及び409ステータスコードの返却は現時点ではそれぞれ下記の理由にてスコープ外とする。
+
+- 400：フロントエンドにてnullと空文字のバリデーションを行なっているため。
+
+- 409：tsutsumekiカラムでは同一内容の登録も許容しているため。
+
+※今後の要件変更に応じ再検討の可能性あり
 
 #### PUT /api/tsutsumekis/{id}
 - 概要：指定したidのツツメキを更新
@@ -85,24 +80,14 @@
 }
 ```
 ##### エラー時
-- ステータス：400 Bad Request
-```
-{
-    "error": "Bad Request"
-}
-```
 - ステータス：404 Not Found
 ```
 {
     "error": "Not Found"
 }
 ```
-- ステータス：409 Conflict
-```
-{
-    "error": "Conflict"
-}
-```
+
+また、POSTと同様の理由で400及び409ステータスコードの返却はスコープ外とする。
 #### DELETE /api/tsutsumekis/{id}
 - 概要：指定したidのツツメキを削除
 - リクエスト：なし(IDはURLで指定)
@@ -115,12 +100,7 @@
     "error": "Not Found"
 }
 ```
-- ステータス：500 Internal Server Error
-```
-{
-    "error": "Internal server error"
-}
-```
+また、DELETEにおいてステータスコード500の返却は想定外エラー以外では行わないものとしスコープから除外する。
 
 #### 補足
 - ベースURL：http://localhost:8080
