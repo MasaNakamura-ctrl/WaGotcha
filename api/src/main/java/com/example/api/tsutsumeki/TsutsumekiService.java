@@ -16,8 +16,12 @@ public class TsutsumekiService {
         return tsutsumekiRepository.findAll();
     }
 
-    public void postTsutsumeki(String tsutsumeki){
-        tsutsumekiRepository.createTsutsumeki(tsutsumeki);
+    public Tsutsumeki postTsutsumeki(String tsutsumeki){
+        int id =tsutsumekiRepository.createTsutsumeki(tsutsumeki);
+        Tsutsumeki newTsutsumeki = new Tsutsumeki();
+        newTsutsumeki.setId(id);
+        newTsutsumeki.setTsutsumeki(tsutsumeki);
+        return newTsutsumeki;
     }
 
     public void putTsutsumeki(int id, String tsutsumeki){

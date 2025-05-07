@@ -31,8 +31,13 @@ public class TsutsumekiController {
     }
     
     @PostMapping
-    public void createTsutsumeki(@RequestBody TsutsumekiRequest request) {
-        tsutsumekiService.postTsutsumeki(request.getTsutsumeki());
+    public ResponseEntity<Tsutsumeki> createTsutsumeki(@RequestBody TsutsumekiRequest request) {
+        try {
+            Tsutsumeki created = tsutsumekiService.postTsutsumeki(request.getTsutsumeki());
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @PutMapping("/{id}")

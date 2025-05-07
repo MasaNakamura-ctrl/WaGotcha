@@ -20,7 +20,7 @@ public class TsutsumekiRepository {
 
     // Read
     public List<Tsutsumeki> findAll(){
-        String sql = "SELECT tsutsumeki FROM tsutsumekis ORDER BY id DESC";
+        String sql = "SELECT id, tsutsumeki FROM tsutsumekis ORDER BY id DESC";
         return jdbcTemplate.query(sql, new HomeRowMapper());
     }
     private static class HomeRowMapper implements RowMapper<Tsutsumeki>{
@@ -28,6 +28,7 @@ public class TsutsumekiRepository {
         @Override
         public Tsutsumeki mapRow(ResultSet rs, int rowNum) throws SQLException{
             Tsutsumeki tsutsumeki = new Tsutsumeki();
+            tsutsumeki.setId(rs.getInt("id"));
             tsutsumeki.setTsutsumeki(rs.getString("tsutsumeki"));
             return tsutsumeki;
         }
@@ -35,8 +36,8 @@ public class TsutsumekiRepository {
 
     // Create
     public int createTsutsumeki(String tsutsumeki){
-        String sql = "INSERT INTO tsutsumekis (tsutsumeki) VALUES(?)";
-        return jdbcTemplate.update(sql, tsutsumeki);
+        String sql = "INSERT INTO tsutsumekis (tsutsumeki) VALUES(?) RETURNING id";
+        return jdbcTemplate.queryForObject(sql, Integer.class, tsutsumeki);
     }
 
     // Update
