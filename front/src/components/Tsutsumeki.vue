@@ -1,6 +1,11 @@
 <script setup>
-import { ref } from 'vue'
-import { tsutsumekis } from './tsutsumeki.js'
+import { onMounted,ref } from 'vue'
+import { tsutsumekis, fetchTsutsumekis } from './tsutsumeki.js'
+import axios from 'axios'
+
+onMounted(() => {
+    fetchTsutsumekis()
+})
 
 // データ追加
 const inputText = ref('')

@@ -1,7 +1,11 @@
-import { ref } from 'vue'
-
-export const tsutsumekis = ref([
-    {id:1, tsutsumeki: "六段の調べやりたい人いない？"},
-    {id:2, tsutsumeki: "来週演奏会やります！"},
-    {id:3, tsutsumeki: "○市でもくもく会やってませんか？"}
-])
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+export const tsutsumekis = ref([])
+export async function fetchTsutsumekis() {
+    try {
+        const response = await axios.get('http://localhost:8080/api/tsutsumekis')
+        tsutsumekis.value = response.data
+    } catch (error) {
+    console.error('タスク取得エラー:', error)
+    }
+}
