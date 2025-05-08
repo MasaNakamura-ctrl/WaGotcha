@@ -29,7 +29,7 @@ public class TsutsumekiService {
         if (updatedRows==0){
             return null;
         }
-        return new Tsutsumeki(id, tsutsumeki);
+        return tsutsumekiRepository.findById(id);
     }
 
     public Tsutsumeki deleteTsutsumeki(int id){

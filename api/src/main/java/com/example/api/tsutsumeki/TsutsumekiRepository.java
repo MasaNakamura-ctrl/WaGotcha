@@ -51,4 +51,13 @@ public class TsutsumekiRepository {
         String sql = "DELETE FROM tsutsumekis WHERE id = ?";
         return jdbcTemplate.update(sql, id);
     }
+
+    public Tsutsumeki findById(int id){
+        String sql = "SELECT id, tsutsumeki FROM tsutsumekis WHERE id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new HomeRowMapper(), id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

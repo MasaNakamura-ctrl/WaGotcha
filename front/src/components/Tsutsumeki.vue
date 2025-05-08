@@ -35,8 +35,20 @@ function editTsutsumeki(index){
     editingIndex.value = index
     editingText.value = tsutsumekis.value[index].tsutsumeki
 }
-function completeEdittingTsutsumeki(index){
-    editingIndex.value = null
+async function completeEdittingTsutsumeki(index){
+    try{
+            const id = tsutsumekis.value[index].id
+            await axios.put(`http://localhost:8080/api/tsutsumekis/${id}`,
+                {
+                    tsutsumeki:editingText.value
+                }
+            )
+            await fetchTsutsumekis()
+            editingText.value = ''
+            editingIndex.value = null
+        } catch(error){
+            console.error('更新エラー',error)
+        }
 }
 function quitEdittingTsutsumeki(index){
     tsutsumekis.value[index].tsutsumeki = editingText.value
@@ -78,7 +90,7 @@ function clickWaGotcha(index){
                         <v-btn size="x-small" variant="outlined" color="error" @click="deleteTsutsumeki(index)">消つ</v-btn>
                     </div>
                     <div v-else>
-                        <textarea v-model="tsutsumekis[index].tsutsumeki"
+                        <textarea v-model="editingText"
                         class="Tsutsumeki-text Aratamu-text" maxlength="140" rows="2"></textarea>
                         <v-btn size="x-small" variant="outlined" color="primary"
                         @click="completeEdittingTsutsumeki(index)">記す</v-btn>
