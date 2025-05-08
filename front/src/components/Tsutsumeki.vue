@@ -3,20 +3,28 @@ import { onMounted,ref } from 'vue'
 import { tsutsumekis, fetchTsutsumekis } from './tsutsumeki.js'
 import axios from 'axios'
 
+// データ一覧表示
 onMounted(() => {
     fetchTsutsumekis()
 })
 
 // データ追加
 const inputText = ref('')
-// 仮データの保持レコード数に1を加えたもの
-let id_count = 4;
-// IDへの対応はRESTAPIと連携次第そちらへ移行
-function addTsutsumeki(){
+const tsutsumeki = ref([])
+async function addTsutsumeki(){
     if (inputText.value.trim()) {
-        tsutsumekis.value.push({id:id_count, tsutsumeki: inputText.value })
-        inputText.value = ''
-        id_count += 1;
+        try{
+            const response = await axios.post('http://localhost:8080/api/tsutsumekis',
+                {
+                    tsutsumeki:inputText.value
+                }
+            )
+            tsutsumeki.value.push(response.data)
+            inputText.value = ''
+            await fetchTsutsumekis()
+        } catch(error){
+            console.error('投稿エラー',error);
+        }
     }
 }
 
