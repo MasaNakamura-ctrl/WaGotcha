@@ -32,11 +32,7 @@ public class TsutsumekiService {
         return tsutsumekiRepository.findById(id);
     }
 
-    public Tsutsumeki deleteTsutsumeki(int id){
-        int deleteRows = tsutsumekiRepository.deleteTsutsumeki(id);
-        if (deleteRows==0){
-            return null;
-        }
-        return new Tsutsumeki();
+    public int deleteTsutsumeki(int id){
+        return tsutsumekiRepository.deleteTsutsumeki(id);
     }
 }

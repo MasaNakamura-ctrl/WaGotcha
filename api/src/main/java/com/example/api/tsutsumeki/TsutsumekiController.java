@@ -60,13 +60,13 @@ public class TsutsumekiController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTsutsumeki(@PathVariable int id) {
-        Tsutsumeki deleted = tsutsumekiService.deleteTsutsumeki(id);
-        if (deleted==null){
+        int deleted = tsutsumekiService.deleteTsutsumeki(id);
+        if (deleted==0){
             Map<String, String> errorBody = new HashMap<>();
             errorBody.put("error", "Not Found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
         } else{
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(deleted);
+            return ResponseEntity.noContent().build();
         }
     }
 }

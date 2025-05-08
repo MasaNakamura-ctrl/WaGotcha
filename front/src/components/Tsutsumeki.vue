@@ -37,18 +37,18 @@ function editTsutsumeki(index){
 }
 async function completeEdittingTsutsumeki(index){
     try{
-            const id = tsutsumekis.value[index].id
-            await axios.put(`http://localhost:8080/api/tsutsumekis/${id}`,
-                {
-                    tsutsumeki:editingText.value
-                }
-            )
-            await fetchTsutsumekis()
-            editingText.value = ''
-            editingIndex.value = null
-        } catch(error){
-            console.error('更新エラー',error)
-        }
+        const id = tsutsumekis.value[index].id
+        await axios.put(`http://localhost:8080/api/tsutsumekis/${id}`,
+            {
+                tsutsumeki:editingText.value
+            }
+        )
+        await fetchTsutsumekis()
+        editingText.value = ''
+        editingIndex.value = null
+    } catch(error){
+        console.error('更新エラー',error)
+    }
 }
 function quitEdittingTsutsumeki(index){
     tsutsumekis.value[index].tsutsumeki = editingText.value
@@ -56,8 +56,14 @@ function quitEdittingTsutsumeki(index){
 }
 
 // データ削除
-function deleteTsutsumeki(index){
-    tsutsumekis.value.splice(index,1)
+async function deleteTsutsumeki(index){
+    try {
+        const id = tsutsumekis.value[index].id
+        await axios.delete(`http://localhost:8080/api/tsutsumekis/${id}`)
+        await fetchTsutsumekis()
+    } catch(error){
+        console.error('削除エラー', error)
+    }
 }
 
 // WaGotcha押下(RESTAPIと連携次第別対応)
