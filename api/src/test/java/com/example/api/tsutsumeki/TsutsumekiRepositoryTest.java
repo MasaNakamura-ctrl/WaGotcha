@@ -83,4 +83,26 @@ public class TsutsumekiRepositoryTest {
         int result = tsutsumekiRepository.updateTsutsumeki(999, "New");
         assertEquals(0, result);
     }
+
+    @Test
+    void testDeleteTsutsumeki(){
+        String sql = "DELETE FROM tsutsumekis WHERE id = ?";
+        when(jdbcTemplate.update(
+            eq(sql),
+            eq(1))
+        ).thenReturn(0);
+        int result = tsutsumekiRepository.deleteTsutsumeki(1);
+        assertEquals(0, result);
+    }
+
+    @Test
+    void testDeleteTsutsumeki_notfound(){
+        String sql = "DELETE FROM tsutsumekis WHERE id = ?";
+        when(jdbcTemplate.update(
+            eq(sql),
+            eq(999))
+        ).thenReturn(0);
+        int result = tsutsumekiRepository.deleteTsutsumeki(999);
+        assertEquals(0, result);
+    }
 }
