@@ -42,4 +42,11 @@ public class TsutsumekiRepositoryTest {
         assertEquals(1, id);
         verify(tsutsumekiRepository, times(1)).createTsutsumeki("Created");
     }
+
+    @Test
+    void testUpdateTsutsumeki(){
+        when(tsutsumekiRepository.updateTsutsumeki(1, "After")).thenReturn(1);
+        int id = tsutsumekiRepository.updateTsutsumeki(1, "After");
+        assertEquals(1,id);
+    }
 }
