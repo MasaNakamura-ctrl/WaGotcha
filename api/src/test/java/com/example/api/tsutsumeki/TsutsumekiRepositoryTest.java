@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -31,5 +33,13 @@ public class TsutsumekiRepositoryTest {
 
         Tsutsumeki result = tsutsumekiRepository.findById(2);
         assertNull(result);
+    }
+
+    @Test
+    void testCreateTsutsumeki(){
+        when(tsutsumekiRepository.createTsutsumeki("Created")).thenReturn(1);
+        int id = tsutsumekiRepository.createTsutsumeki("Created");
+        assertEquals(1, id);
+        verify(tsutsumekiRepository, times(1)).createTsutsumeki("Created");
     }
 }
