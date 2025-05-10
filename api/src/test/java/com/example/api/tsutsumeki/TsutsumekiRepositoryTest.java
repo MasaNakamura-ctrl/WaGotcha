@@ -2,51 +2,49 @@ package com.example.api.tsutsumeki;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 @ExtendWith(MockitoExtension.class)
 public class TsutsumekiRepositoryTest {
     
     @Mock
+    JdbcTemplate jdbcTemplate;
+
+    @InjectMocks
     TsutsumekiRepository tsutsumekiRepository;
 
     @Test
     void testFindTsutsumeki_found(){
-        Tsutsumeki tsutsumeki = new Tsutsumeki(1, "Here I Am!");
-        when(tsutsumekiRepository.findById(1)).thenReturn(tsutsumeki);
-
+        Tsutsumeki expected = new Tsutsumeki(1, "Here I Am!");
+        String sql = "SELECT id, tsutsumeki FROM tsutsumekis WHERE id = ?";
+        when(jdbcTemplate.queryForObject(
+            eq(sql),
+            any(RowMapper.class),
+            eq(1))
+            ).thenReturn(expected);
         Tsutsumeki result = tsutsumekiRepository.findById(1);
         assertNotNull(result);
         assertEquals("Here I Am!", result.getTsutsumeki());
     }
 
     @Test
-    void testFindTsutsumeki_notfound(){
-        when(tsutsumekiRepository.findById(2)).thenReturn(null);
-
-        Tsutsumeki result = tsutsumekiRepository.findById(2);
-        assertNull(result);
-    }
-
-    @Test
-    void testCreateTsutsumeki(){
-        when(tsutsumekiRepository.createTsutsumeki("Created")).thenReturn(1);
-        int id = tsutsumekiRepository.createTsutsumeki("Created");
-        assertEquals(1, id);
-        verify(tsutsumekiRepository, times(1)).createTsutsumeki("Created");
-    }
-
-    @Test
-    void testUpdateTsutsumeki(){
-        when(tsutsumekiRepository.updateTsutsumeki(1, "After")).thenReturn(1);
-        int id = tsutsumekiRepository.updateTsutsumeki(1, "After");
-        assertEquals(1,id);
+    void testFindTsutsumeki_notfound() {
+        String sql = "SELECT id, tsutsumeki FROM tsutsumekis WHERE id = ?";
+        when(jdbcTemplate.queryForObject(
+            eq(sql),
+            any(RowMapper.class),
+            eq(999))
+        ).thenThrow(new org.springframework.dao.EmptyResultDataAccessException(1));
+        Tsutsumeki result = tsutsumekiRepository.findById(999);
+        assertEquals(null, result);
     }
 }
