@@ -47,4 +47,16 @@ public class TsutsumekiRepositoryTest {
         Tsutsumeki result = tsutsumekiRepository.findById(999);
         assertEquals(null, result);
     }
+
+    @Test
+    void testCreateTsutsumeki(){
+        String sql = "INSERT INTO tsutsumekis (tsutsumeki) VALUES(?) RETURNING id";
+        when(jdbcTemplate.queryForObject(
+        eq(sql),
+        eq(Integer.class),
+        eq("Created")
+        )).thenReturn(1);
+        int id = tsutsumekiRepository.createTsutsumeki("Created");
+        assertEquals(1, id);
+    }
 }
