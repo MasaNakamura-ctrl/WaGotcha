@@ -59,4 +59,28 @@ public class TsutsumekiRepositoryTest {
         int id = tsutsumekiRepository.createTsutsumeki("Created");
         assertEquals(1, id);
     }
+
+    @Test
+    void testUpdateTsutsumeki(){
+        String sql = "UPDATE tsutsumekis SET tsutsumeki = ? WHERE id = ?";
+        when(jdbcTemplate.update(
+        eq(sql),
+        eq("New"),
+        eq(1)
+        )).thenReturn(1);
+        int id = tsutsumekiRepository.updateTsutsumeki(1, "New");
+        assertEquals(1,id);
+    }
+
+    @Test
+    void testUpdateTsutsumeki_notfound(){
+        String sql = "UPDATE tsutsumekis SET tsutsumeki = ? WHERE id = ?";
+        when(jdbcTemplate.update(
+            eq(sql),
+            eq("New"),
+            eq(999))
+        ).thenReturn(0);
+        int result = tsutsumekiRepository.updateTsutsumeki(999, "New");
+        assertEquals(0, result);
+    }
 }
