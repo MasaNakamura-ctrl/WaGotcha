@@ -1,5 +1,8 @@
 package com.example.api.tsutsumeki;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
@@ -21,6 +24,21 @@ public class TsutsumekiRepositoryTest {
 
     @InjectMocks
     TsutsumekiRepository tsutsumekiRepository;
+
+    @Test
+    void testFindAll(){
+        Tsutsumeki expected1 = new Tsutsumeki(1, "First");
+        Tsutsumeki expected2 = new Tsutsumeki(2,"Second");
+        List<Tsutsumeki> tsutsumekiList = Arrays.asList(expected1, expected2);
+        String sql = "SELECT id, tsutsumeki FROM tsutsumekis ORDER BY id DESC";
+        when(jdbcTemplate.query(
+            eq(sql),
+            any(RowMapper.class))
+        ).thenReturn(tsutsumekiList);
+        List<Tsutsumeki> result = tsutsumekiRepository.findAll();
+        assertEquals(tsutsumekiList.size(), result.size());
+        assertEquals(tsutsumekiList, result);
+    }
 
     @Test
     void testFindTsutsumeki_found(){

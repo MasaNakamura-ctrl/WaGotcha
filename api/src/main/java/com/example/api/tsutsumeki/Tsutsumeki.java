@@ -29,4 +29,30 @@ public class Tsutsumeki {
     public void setTsutsumeki(String tsutsumeki){
         this.tsutsumeki = tsutsumeki;
     }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        result = prime * result + ((tsutsumeki == null) ? 0 : tsutsumeki.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Tsutsumeki other = (Tsutsumeki) obj;
+        if (id != other.id)
+            return false;
+        if (tsutsumeki == null) {
+            if (other.tsutsumeki != null)
+                return false;
+        } else if (!tsutsumeki.equals(other.tsutsumeki))
+            return false;
+        return true;
+    }
 }
