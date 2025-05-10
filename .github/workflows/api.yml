@@ -20,8 +20,8 @@ jobs:
       
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
-        working-directory: ../api/src/test/java/com/example/api/tsutsumeki
+        working-directory: ./api
       
       - name: Test with Maven
-        run: mnv --batch-mode test
-        working-directory: ../api/src/test/java/com/example/api/tsutsumeki
+        run: mvn --batch-mode test
+        working-directory: ./api
