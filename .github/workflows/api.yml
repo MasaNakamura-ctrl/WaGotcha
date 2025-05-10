@@ -9,4 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo hello world
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+        working-directory: ../api/src/test/java/com/example/api/tsutsumeki
+      
+      - name: Test with Maven
+        run: mnv --batch-mode test
+        working-directory: ../api/src/test/java/com/example/api/tsutsumeki
