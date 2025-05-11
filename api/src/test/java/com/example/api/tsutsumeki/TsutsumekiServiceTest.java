@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(MockitoExtension.class)
 public class TsutsumekiServiceTest {
@@ -24,5 +25,28 @@ public class TsutsumekiServiceTest {
         Tsutsumeki result = tsutsumekiService.postTsutsumeki("Success");
         assertEquals(fakeId, result.getId());
         assertEquals(input, result.getTsutsumeki());
+    }
+
+    @Test
+    void testPutTsutsumeki(){
+        String input = "New";
+        int fakeId = 1;
+        Tsutsumeki fakeTsutsumeki = new Tsutsumeki();
+        fakeTsutsumeki.setId(fakeId);
+        fakeTsutsumeki.setTsutsumeki(input);
+        when(tsutsumekiRepository.updateTsutsumeki(fakeId, input)).thenReturn(fakeId);
+        when(tsutsumekiRepository.findById(fakeId)).thenReturn(fakeTsutsumeki);
+        Tsutsumeki result = tsutsumekiService.putTsutsumeki(1, "New");
+        assertEquals(fakeId, result.getId());
+        assertEquals(input, result.getTsutsumeki());
+    }
+
+    @Test
+    void testPutTsutsumeki_notfound(){
+        String input = "New";
+        int fakeId = 999;
+        when(tsutsumekiRepository.updateTsutsumeki(fakeId, input)).thenReturn(0);
+        Tsutsumeki result = tsutsumekiService.putTsutsumeki(fakeId, input);
+        assertNull(result);
     }
 }
