@@ -7,6 +7,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -16,6 +20,26 @@ public class TsutsumekiServiceTest {
     TsutsumekiRepository tsutsumekiRepository;
     @InjectMocks
     TsutsumekiService tsutsumekiService;
+
+    @Test
+    void testGetAllTsutsumekis(){
+        Tsutsumeki expected1 = new Tsutsumeki(1, "First");
+        Tsutsumeki expected2 = new Tsutsumeki(2,"Second");
+        List<Tsutsumeki> tsutsumekiList = Arrays.asList(expected1, expected2);
+        when(tsutsumekiRepository.findAll()).thenReturn(tsutsumekiList);
+        List<Tsutsumeki> result = tsutsumekiService.getAllTsutsumekis();
+        assertEquals(tsutsumekiList.size(), result.size());
+        assertEquals(tsutsumekiList, result);
+    }
+
+    @Test
+    void testGetAllTsutsumekis_empty(){
+        List<Tsutsumeki> tsutsumekiList = Arrays.asList();
+        when(tsutsumekiRepository.findAll()).thenReturn(tsutsumekiList);
+        List<Tsutsumeki> result = tsutsumekiService.getAllTsutsumekis();
+        assertEquals(tsutsumekiList.size(), result.size());
+        assertEquals(tsutsumekiList, result);
+    }
 
     @Test
     void testPostTsutsumeki(){
