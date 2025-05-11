@@ -83,4 +83,22 @@ public class TsutsumekiControllerTest {
         .content(objectMapper.writeValueAsString(request)))
         .andExpect(status().isInternalServerError());
     }
+
+    @Test
+    void testUpdateTsutsumeki() throws Exception{
+        Tsutsumeki fakeTsutsumeki = new Tsutsumeki();
+        String input = "New";
+        int id = 1;
+        fakeTsutsumeki.setId(id);
+        fakeTsutsumeki.setTsutsumeki(input);
+        TsutsumekiRequest request = new TsutsumekiRequest();
+        request.setTsutsumeki("New");
+        when(tsutsumekiService.putTsutsumeki(id,input)).thenReturn(fakeTsutsumeki);
+        mockMvc.perform(put("/api/tsutsumekis/{id}", id)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(id))
+        .andExpect(jsonPath("$.tsutsumeki").value("New"));
+    }
 }
