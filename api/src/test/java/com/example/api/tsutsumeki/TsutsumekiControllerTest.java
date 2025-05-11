@@ -101,4 +101,17 @@ public class TsutsumekiControllerTest {
         .andExpect(jsonPath("$.id").value(id))
         .andExpect(jsonPath("$.tsutsumeki").value("New"));
     }
+
+    @Test
+    void testUpdateTsutsumeki_notfound() throws Exception{
+        int id = 999;
+        TsutsumekiRequest request = new TsutsumekiRequest();
+        request.setTsutsumeki("error");
+        when(tsutsumekiService.putTsutsumeki(id,"error")).thenReturn(null);
+        mockMvc.perform(put("/api/tsutsumekis/{id}", id)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)))
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.error").value("Not Found"));
+    }
 }
