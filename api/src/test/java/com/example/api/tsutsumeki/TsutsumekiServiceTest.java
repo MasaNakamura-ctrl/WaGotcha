@@ -46,7 +46,23 @@ public class TsutsumekiServiceTest {
         String input = "New";
         int fakeId = 999;
         when(tsutsumekiRepository.updateTsutsumeki(fakeId, input)).thenReturn(0);
-        Tsutsumeki result = tsutsumekiService.putTsutsumeki(fakeId, input);
+        Tsutsumeki result = tsutsumekiService.putTsutsumeki(999, "New");
         assertNull(result);
+    }
+
+    @Test
+    void testDeleteTsutsumeki(){
+        int fakeId = 1;
+        when(tsutsumekiRepository.deleteTsutsumeki(fakeId)).thenReturn(fakeId);
+        int result = tsutsumekiService.deleteTsutsumeki(1);
+        assertEquals(fakeId, result);
+    }
+
+    @Test
+    void testDeleteTsutsumeki_notfound(){
+        int fakeId = 999;
+        when(tsutsumekiRepository.deleteTsutsumeki(fakeId)).thenReturn(0);
+        int result = tsutsumekiService.deleteTsutsumeki(999);
+        assertEquals(0, result);
     }
 }
