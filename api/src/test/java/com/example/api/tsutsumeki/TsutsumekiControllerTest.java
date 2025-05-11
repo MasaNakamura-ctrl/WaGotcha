@@ -114,4 +114,29 @@ public class TsutsumekiControllerTest {
         .andExpect(status().isNotFound())
         .andExpect(jsonPath("$.error").value("Not Found"));
     }
+
+    @Test
+    void testDeleteTsutsumeki() throws Exception{
+        Tsutsumeki fakeTsutsumeki = new Tsutsumeki();
+        String input = "Delete";
+        int id = 1;
+        fakeTsutsumeki.setId(id);
+        fakeTsutsumeki.setTsutsumeki(input);
+        when(tsutsumekiService.deleteTsutsumeki(id)).thenReturn(fakeTsutsumeki.getId());
+        mockMvc.perform(delete("/api/tsutsumekis/{id}", id))
+        .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void testDeleteTsutsumeki_notfound() throws Exception{
+        Tsutsumeki fakeTsutsumeki = new Tsutsumeki();
+        String input = "Delete";
+        int id = 999;
+        fakeTsutsumeki.setId(id);
+        fakeTsutsumeki.setTsutsumeki(input);
+        when(tsutsumekiService.deleteTsutsumeki(id)).thenReturn(0);
+        mockMvc.perform(delete("/api/tsutsumekis/{id}", id))
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.error").value("Not Found"));
+    }
 }
