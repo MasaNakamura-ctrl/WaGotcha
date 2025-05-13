@@ -1,6 +1,6 @@
 # WaGotcha!!
-[![api](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml/badge.svg)](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml)
 ## 本アプリでの対応範囲
+[![api](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml/badge.svg)](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml)
 - 要件定義
 - **`設計書作成`**
 - **`モック作成`**
@@ -8,8 +8,8 @@
 - **`バックエンド実装:Spring Boot`**
 - **`フロントエンド実装:Vue.js`**
 - **`コンテナ構築:Docker`**
-- **`単体テスト:CI,JUnit5,Mockito,Postman`**
-- **`結合テスト`**
+- **`単体テスト:CI,JUnit5,Mockito`**
+- **`結合テスト:Postman`**
 - クラウドサービス(本番環境)にデプロイ
 - システムテスト
 
