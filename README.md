@@ -1,5 +1,5 @@
 # WaGotcha!!
-
+[![api](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml/badge.svg)](https://github.com/MasaNakamura-ctrl/WaGotcha/actions/workflows/api.yml)
 ## 本アプリでの対応範囲
 - 要件定義
 - **`設計書作成`**
