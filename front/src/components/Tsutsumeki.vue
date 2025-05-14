@@ -77,7 +77,7 @@ function clickWaGotcha(index){
     <v-container>
         <v-row justify="center">
             <v-col cols="12" sm="10" md="8" lg="6">
-                <h1 class="text-h5 text-sm-h4 text-center">ツツメキ</h1>
+                <h1 class="text-center">ツツメキ</h1>
                 <div class="Tsutsumeki-create">
                     <textarea v-model="inputText" class="Tsutsumeki-text"
                     maxlength="140" placeholder="ツツメキしてWaGotchaしてもらおう！" rows="2">

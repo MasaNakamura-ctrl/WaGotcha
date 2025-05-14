@@ -1,3 +1,7 @@
+body{
+  background-color: #F0F2F1;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -7,6 +11,8 @@
 
 .header{
   font-size: 18px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color:#40403E;
 }
 
 nav ul {
@@ -15,20 +21,31 @@ nav ul {
   gap: 24px;
   padding: 0;
   margin-bottom: 32px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #40403E;
 }
 nav li {
   display: inline;
 }
 nav a {
   text-decoration: none;
-  color:black;
+  color:#40403E;
   font-weight: 400;
   padding: 12px 0;
+  font-family: 'Noto Sans JP', sans-serif;
   display: inline-block;
 }
 nav a:hover {
-  color: #1e90ff;
+  color: #659DC0;
+}
+
+.text-center{
+  font-family: 'Noto Sans JP', sans-serif;
+  color:#40403E;
+}
+
+p{
+  font-family: 'Noto Sans JP', sans-serif;
+  color:#40403E;
 }
 
 .Tsutsumeki-create{
@@ -38,6 +55,7 @@ nav a:hover {
   display:flex;
   flex-direction: column;
   gap: 10px;
+  color: #D0D8DA;
 }
 
 .Tsutsumeki-text{
@@ -45,9 +63,12 @@ nav a:hover {
   height: 200px;
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #000000;
+  border: 1px solid #40403E;
+  color:#40403E;
+  font-family: 'Noto Sans JP', sans-serif;
   resize: none;
   box-sizing: border-box;
+  background-color: #D0D8DA;
 }
 
 @media (min-width: 600px) {
@@ -57,7 +78,7 @@ nav a:hover {
 }
 
 .Tsutsumeki-text::placeholder{
-  color:#D3D3D3;
+  color:#8C8C8A;
 }
 
 .Tsutsumeki-posted{
@@ -66,9 +87,10 @@ nav a:hover {
   margin-bottom: 16px;
   font-size: 1rem;
   border: 1px solid #000000;
+  font-family: 'Noto Sans JP', sans-serif;
   border-radius: 6px;
   box-sizing: border-box;
-  background-color:#f9f9f9;
+  background-color:#D0D8DA;
 }
 
 @media (min-width: 600px) {
@@ -79,7 +101,8 @@ nav a:hover {
 
 .Tsutsumeki-words{
   margin-bottom: 8px;
-  color: #000000;
+  color: #40403E;
+  font-family: 'Noto Sans JP', sans-serif;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -88,6 +111,7 @@ nav a:hover {
   width: 100%;
   padding: 8px;
   font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
   border: 1px solid #000000;
   resize: vertical;
   box-sizing: border-box;
@@ -100,6 +124,5 @@ nav a:hover {
 }
 
 .WaGotcha.active{
-  color:red;
   font-weight:bold;
 }
