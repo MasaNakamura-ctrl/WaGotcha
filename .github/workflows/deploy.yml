@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: ./mvnw clean package -DskipTests
+        run: ../api/mvnw clean package -DskipTests
 
       - name: Copy files via SCP
         uses: appleboy/scp-action@v0.1.7
