@@ -38,16 +38,14 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "Stopping old app..."
-            pkill -f 'api-0.0.1-SNAPSHOT.jar' || true
-
+            PID=$(pgrep -f 'api-0.0.1-SNAPSHOT.jar') && kill $PID || true
             echo "Setting environment variables..."
             export DB_URL=${{ secrets.DB_URL }}
             export DB_USERNAME=${{ secrets.DB_USERNAME }}
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-
             echo "Launching app..."
-            nohup java -jar ~/api/api-0.0.1-SNAPSHOT.jar > ~/api/app.log 2>&1 &
-            sleep 3
-
+            nohup java -jar ~/api/api-0.0.1-SNAPSHOT.jar > ~/api/app.log 2>&1 & disown
+            sleep 5
             echo "Checking app status..."
             pgrep -f 'api-0.0.1-SNAPSHOT.jar' && echo "App is running" || echo "App failed to start"
+          command_timeout: 10m
