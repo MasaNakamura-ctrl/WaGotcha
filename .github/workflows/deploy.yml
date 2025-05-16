@@ -44,8 +44,7 @@ jobs:
             export DB_USERNAME=${{ secrets.DB_USERNAME }}
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             echo "Launching app..."
-            nohup java -jar ~/api/api-0.0.1-SNAPSHOT.jar > ~/api/app.log 2>&1 & disown
+            setsid nohup java -jar ~/api/api-0.0.1-SNAPSHOT.jar > ~/api/app.log 2>&1 < /dev/null &
             sleep 5
             echo "Checking app status..."
             pgrep -f 'api-0.0.1-SNAPSHOT.jar' && echo "App is running" || echo "App failed to start"
-          command_timeout: 10m
