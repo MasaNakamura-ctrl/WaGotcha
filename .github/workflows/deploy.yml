@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Confirm jar exists
-        run: test -f api/target/api-0.0.1-SNAPSHOT.jar && echo "Jar exists." || (echo "Jar missing!" && exit 1)
+        run: test -f api/api/target/api-0.0.1-SNAPSHOT.jar && echo "Jar exists." || (echo "Jar missing!" && exit 1)
       - name: Checkout Repository
         uses: actions/checkout@v3
 
