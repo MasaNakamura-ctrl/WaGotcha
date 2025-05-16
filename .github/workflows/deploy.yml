@@ -17,8 +17,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: ./mvnw clean package -DskipTests
-        working-directory: ./api
+        run: |
+          cd api
+          ./mvnw clean package -DskipTests
 
       - name: Copy files via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -26,7 +27,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "target/api-0.0.1-SNAPSHOT.jar"
+          source: "api/target/api-0.0.1-SNAPSHOT.jar"
           target: "~/api"
 
       - name: SSH and Restart App
