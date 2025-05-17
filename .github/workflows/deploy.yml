@@ -47,7 +47,7 @@ jobs:
             PID=$(pgrep -f 'api-0.0.1-SNAPSHOT.jar') && kill $PID || echo "No process found"
 
             echo "Navigating to app directory..."
-            cd ~/api
+            cd ~/api/api/target
 
             echo "Launching new app..."
             export DB_URL='${{ secrets.DB_URL }}'
