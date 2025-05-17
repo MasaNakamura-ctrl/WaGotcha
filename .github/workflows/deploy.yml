@@ -51,9 +51,9 @@ jobs:
             cd ~/api
 
             echo "Launching new app..."
-            DB_URL='${{ secrets.DB_URL }}' \
-            DB_USERNAME='${{ secrets.DB_USERNAME }}' \
-            DB_PASSWORD='${{ secrets.DB_PASSWORD }}' \
-            setsid nohup java -jar api-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
+            -Dspring.datasource.url='${{ secrets.DB_URL }}' \
+            -Dspring.datasource.username='${{ secrets.DB_USERNAME }}' \
+            -Dspring.datasource.password='${{ secrets.DB_PASSWORD }}' \
+            -jar api-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
 
             echo "App deployment finished."
