@@ -23,9 +23,6 @@ jobs:
         run: mvn clean package -DskipTests
         working-directory: ./api
 
-      - name: Build JAR file
-        run: ./mvnw clean package -DskipTests
-
       - name: Upload JAR to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
