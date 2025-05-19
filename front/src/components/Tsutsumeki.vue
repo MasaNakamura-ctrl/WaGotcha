@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted,ref } from 'vue'
-import { tsutsumekis, fetchTsutsumekis } from './tsutsumeki.js'
+import { tsutsumekis, fetchTsutsumekis, fetchTsutsumekisById } from './tsutsumeki.js'
 import axios from 'axios'
 
 // データ一覧表示
@@ -51,7 +51,7 @@ async function completeEdittingTsutsumeki(index){
     }
 }
 function quitEdittingTsutsumeki(index){
-    tsutsumekis.value[index].tsutsumeki = editingText.value
+    fetchTsutsumekisById(index)
     editingIndex.value = null
 }
 
