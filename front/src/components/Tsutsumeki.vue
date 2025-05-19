@@ -88,20 +88,24 @@ function clickWaGotcha(index){
                 <div class="Tsutsumeki-posted" v-for="(tsutsumeki, index) in tsutsumekis">
                     <div v-if="editingIndex !== index">
                         <p class="Tsutsumeki-words">{{ tsutsumeki.tsutsumeki }}</p>
-                        <v-btn size="x-small" variant="outlined"
-                        color="primary" class="WaGotcha" @click="clickWaGotcha(index)"
-                        :class= "{active: clickedIndices.has(tsutsumeki.id)}"
-                        >WaGotcha</v-btn>
-                        <v-btn size="x-small" variant="outlined" color="success" @click="editTsutsumeki(index)">改む</v-btn>
-                        <v-btn size="x-small" variant="outlined" color="error" @click="deleteTsutsumeki(index)">消つ</v-btn>
+                        <div class="d-flex align-center justify-space-between">
+                            <v-btn icon="mdi-home" size="x-small" variant="outlined"
+                            color="primary" class="WaGotcha" @click="clickWaGotcha(index)"
+                            :class= "{active: clickedIndices.has(tsutsumeki.id)}"
+                            >WG</v-btn>
+                            <v-btn icon="mdi-home" size="x-small" variant="outlined" color="success" @click="editTsutsumeki(index)">改む</v-btn>
+                            <v-btn icon="mdi-home" size="x-small" variant="outlined" color="error" @click="deleteTsutsumeki(index)">消つ</v-btn>
+                        </div>
                     </div>
                     <div v-else>
                         <textarea v-model="editingText"
                         class="Tsutsumeki-text Aratamu-text" maxlength="140" rows="2"></textarea>
-                        <v-btn size="x-small" variant="outlined" color="primary"
-                        @click="completeEdittingTsutsumeki(index)">記す</v-btn>
-                        <v-btn size="x-small" variant="outlined" color="error"
-                        @click="quitEdittingTsutsumeki(index)">辞む</v-btn>
+                        <div class="d-flex align-center justify-space-between">
+                            <v-btn icon="mdi-home" size="x-small" variant="outlined" color="primary"
+                            @click="completeEdittingTsutsumeki(index)">記す</v-btn>
+                            <v-btn icon="mdi-home" size="x-small" variant="outlined" color="error"
+                            @click="quitEdittingTsutsumeki(index)">辞む</v-btn>
+                        </div>
                     </div>
                 </div>
             </v-col>
