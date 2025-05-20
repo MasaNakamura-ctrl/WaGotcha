@@ -47,7 +47,7 @@
     │   └── Springを中心とするRESTAPIのソースコード
     ├── front/
     │   └── Vue.jsを中心とするフロントエンドのソースコード
-    ├── .github/
+    └── .github/
         └── workflows/
             └── 自動テストのワークフロー
 ```
