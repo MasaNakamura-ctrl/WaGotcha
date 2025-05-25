@@ -84,12 +84,11 @@ p{
 .Tsutsumeki-posted{
   width:100%;
   padding: 10px;
-  margin-bottom: 16px;
   font-size: 1rem;
   border: 1px solid #000000;
   font-family: 'Noto Sans JP', sans-serif;
-  border-radius: 6px;
   box-sizing: border-box;
+  margin-top: -1px;
   background-color:#D0D8DA;
 }
 
