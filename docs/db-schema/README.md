@@ -44,13 +44,27 @@ networks:
 ```
 CREATE TABLE IF NOT EXISTS tsutsumekis(
     id SERIAL PRIMARY KEY,
-    tsutsumeki VARCHAR(140) NOT NULL
+    userId INTEGER REFERENCES users(userId) ON DELETE CASCADE,
+    tsutsumeki VARCHAR(140) NOT NULL,
+    tsutsumekiDate TIMESTAMP NOT NULL,
+    WaGotchaNum INTEGER NOT NULL
 );
 
-INSERT INTO tsutsumekis(tsutsumeki) VALUES
-('六段の調べやりたい人いない？'),
-('来週演奏会やります！'),
-('○市でもくもく会やってませんか？')
+INSERT INTO tsutsumekis(userId, tsutsumeki, tsutsumekiDate, WaGotchaNum) VALUES
+(1, '六段の調べやりたい人いない？', '2025-05-25 00:00:00', 0),
+(1, '来週演奏会やります！', '2025-05-25 09:00:00', 4),
+(1, '○市でもくもく会やってませんか？', '2025-05-25 12:00:00', 10)
+;
+
+CREATE TABLE IF NOT EXISTS users(
+    userId SERIAL PRIMARY KEY,
+    userName VARCHAR(20) NOT null,
+    password VARCHAR(20) NOT null
+);
+
+INSERT INTO users(userName, password) VALUES
+('Guest', 'GuestPassword'),
+('User1', 'Password1')
 ;
 ```
 
@@ -84,12 +98,22 @@ docker-compose down
 ### テーブル定義
 | テーブル名   | 概要 |
 | --- | ----------- |
+| users | 和楽知屋に登録しているユーザーの情報 |
 | tsutsumekis | ツツメキでの投稿内容 |
 
-
 ### カラム定義
+#### users
+| カラム名 | 型 | 最大文字数 | 主キー | 必須 | 概要 |
+| --- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| userId | INTEGER |  | ○ | ○ | ユーザー毎に割り当てられるID |
+| userName | VARCHAR | 20 |  | ○ | ユーザーのアカウント名 |
+| password | VARCHAR | 20 |  | ○ | ログインに必要となるパスワード |
+
 #### tsutsumekis
 | カラム名 | 型 | 最大文字数 | 主キー | 必須 | 概要 |
 | --- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | id | INTEGER |  | ○ | ○ | ツツメキ毎に割り当てられるID |
+| userId | INTEGER |  |  | ○ | ユーザー毎に割り当てられるIDでusersテーブルを参照 |
 | tsutsumeki | VARCHAR | 140 |  | ○ | 各ツツメキの投稿内容 |
+| tsutsumekiDate | TIMESTAMP |  |  | ○ | ツツメキの投稿日時 |
+| WaGotchaNum | INTEGER |  |  | ○ | いいねにあたるボタンを押下された回数 |
