@@ -117,3 +117,5 @@ docker-compose down
 | tsutsumeki | VARCHAR | 140 |  | ○ | 各ツツメキの投稿内容 |
 | tsutsumekiDate | TIMESTAMP |  |  | ○ | ツツメキの投稿日時 |
 | WaGotchaNum | INTEGER |  |  | ○ | いいねにあたるボタンを押下された回数 |
+
+※tsutsumekisテーブルのカラム追加はログイン実装後に実施予定
