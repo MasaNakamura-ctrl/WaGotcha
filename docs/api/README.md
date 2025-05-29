@@ -1,4 +1,52 @@
 # RESTAPI仕様書
+## ログイン機能
+### エンドポイント一覧
+| メソッド | パス | 処理 |
+| --- | ----------- | ------- |
+| POST | /api/login | ログイン認証 |
+
+#### POST /api/login
+- 概要：ログイン情報のポスト
+- リクエスト(例)
+```
+{
+    "userName": "登録しているユーザーID",
+    "password": "登録しているパスワード"
+}
+```
+##### 成功時
+- ステータス：200 OK
+- レスポンス(例)
+```
+{
+    "message": "Login Successful",
+    "user": {
+        "userId": "登録しているユーザーID",
+        "userName": "登録しているユーザー名"
+    }
+}
+```
+- ヘッダーに Set-Cookie: JSESSIONID=... が含まれ、クライアントが以降のリクエストでセッションを維持できるようにする。
+##### 不正なエラー時
+- ステータス：400 Bad Request
+- レスポンス(例)
+```
+{
+    "error": "Bad Request"
+}
+```
+##### 認証エラー時
+- ステータス：401 Unauthorized
+- レスポンス(例)
+```
+{
+    "error": "Unauthorized"
+}
+```
+
+#### 補足
+- ベースURL：http://localhost:8080
+- Content-Type：application/json
 ## ツツメキのCRUD
 ### エンドポイント一覧
 | メソッド | パス | 処理 |
