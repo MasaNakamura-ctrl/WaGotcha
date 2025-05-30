@@ -59,7 +59,7 @@ INSERT INTO tsutsumekis(userId, tsutsumeki, tsutsumekiDate, WaGotchaNum) VALUES
 CREATE TABLE IF NOT EXISTS users(
     userId SERIAL PRIMARY KEY,
     userName VARCHAR(20) NOT null,
-    password VARCHAR(20) NOT null
+    password VARCHAR(1024) NOT null
 );
 
 INSERT INTO users(userName, password) VALUES
